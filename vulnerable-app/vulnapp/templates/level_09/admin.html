@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}ADMIN CONTROL - Enterprise ERP{% endblock %}
+
+{% block content %}
+<div class="card" style="border: 4px solid #dc2626; background: #fff5f5;">
+ <h1 style="color: #991b1b;">⚠️ Restricted Admin Access ⚠️</h1>
+ <p style="font-size: 1.2rem; font-weight: bold;">Welcome to the Master ERP Command Center.</p>
+
+ <div
+  style="background: #000; color: #39ff14; padding: 2rem; border-radius: 8px; font-family: 'Courier New', Courier, monospace; margin-top: 2rem;">
+  <p>[SYSTEM] Privilege verification successful via custom Role header.</p>
+  <p>[SYSTEM] Secret Vault Key decrypted...</p>
+  <h2 style="color: #fff; text-shadow: 0 0 10px #39ff14;">{{ flag }}</h2>
+ </div>
+
+ <div style="margin-top: 2rem;">
+  <p><strong>Critical Actions:</strong></p>
+  <button class="btn" style="background: #dc2626;" onclick="alert('Action not permitted in demo mode.')">Reset All
+   Databases</button>
+  <button class="btn" onclick="window.history.back()">Exit Secure Zone</button>
+ </div>
+</div>
+{% endblock %}

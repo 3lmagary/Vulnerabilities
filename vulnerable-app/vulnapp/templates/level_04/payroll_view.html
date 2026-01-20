@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Payroll Statement - GlobalLogic{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 800px; margin: 0 auto; border-top: 8px solid var(--primary-color);">
+ <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+  <div>
+   <h2 style="margin: 0;">GlobalLogic HR Solutions</h2>
+   <p style="color: #94a3b8;">Financial Services & Payroll Division</p>
+  </div>
+  <div style="text-align: right;">
+   <h1 style="color: var(--primary-color); margin: 0;">PAYSLIP</h1>
+   <p>Period: JAN 2026</p>
+  </div>
+ </div>
+
+ <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
+
+ <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+  <div>
+   <p style="font-weight: bold; margin-bottom: 0.5rem; color: var(--primary-color);">EMPLOYEE INFORMATION</p>
+   <p><strong>Name:</strong> {{ employee.name }}</p>
+   <p><strong>Employee ID:</strong> #{{ employee.id }}</p>
+   <p><strong>Position:</strong> {{ employee.position }}</p>
+   <p><strong>Department:</strong> {{ employee.dept }}</p>
+  </div>
+  <div>
+   <p style="font-weight: bold; margin-bottom: 0.5rem; color: var(--primary-color);">EARNINGS & DEDUCTIONS</p>
+   <div style="display: flex; justify-content: space-between;">
+    <span>Basic Salary:</span>
+    <span style="font-family: monospace; font-size: 1.1rem;">{{ employee.salary }}$</span>
+   </div>
+   <div style="display: flex; justify-content: space-between; color: #f87171;">
+    <span>Tax Withheld:</span>
+    <span>(Calculated)</span>
+   </div>
+   <hr style="border-style: dashed; border-color: var(--border-color);">
+   <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
+    <span>NET PAY:</span>
+    <span style="color: var(--accent-color);">{{ employee.salary }}$</span>
+   </div>
+  </div>
+ </div>
+
+ <div style="background-color: var(--sidebar-bg); padding: 1rem; border-radius: 6px; font-size: 0.9rem;">
+  <p><strong>Note:</strong> This is a secure digital document generated automatically by the GlobalLogic payroll system.
+   If there are any discrepancies, please contact your HR representative immediately.</p>
+ </div>
+
+ <div style="margin-top: 2rem; text-align: center;">
+  <button class="btn" onclick="window.print()">📥 Download as PDF</button>
+  <a href="/level-04/dashboard" class="btn"
+   style="background-color: var(--border-color); text-decoration: none; margin-left: 1rem;">Back to Dashboard</a>
+ </div>
+</div>
+{% endblock %}

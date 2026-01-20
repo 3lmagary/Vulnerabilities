@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}CloudLink Node Explorer{% endblock %}
+
+{% block content %}
+<div
+ style="background-color: #010409; padding: 2rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--border-color);">
+ <h1 style="color: #58a6ff; margin: 0;">CloudLink Infrastructure ☁️</h1>
+ <p style="color: #8b949e;">Global Network Node Monitoring & API Connectivity Test Utility</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem;">
+ <!-- TOOL SECTION -->
+ <div>
+  <div class="card">
+   <h3>Diagnostic Tool: Connectivity Probe</h3>
+   <p>Verify connectivity between CloudLink Edge nodes and target internal or external APIs.</p>
+
+   <form id="probeForm">
+    <label>Target Node Endpoint (URL)</label>
+    <input type="text" name="target" placeholder="https://api.partner-services.com/v1/health" required>
+
+    <div
+     style="background-color: #0d1117; padding: 1rem; border-radius: 6px; border-left: 4px solid #d29922; margin-bottom: 1rem;">
+     <p style="font-size: 0.85rem; margin: 0; color: #d29922;">⚠️ <strong>Security Notice:</strong> Direct communication
+      with restricted loopback addresses and internal metadata services is blocked by the CloudLink Security Engine
+      (v4.2).</p>
+    </div>
+
+    <button type="submit" class="btn" style="width: 100%; height: 50px; font-size: 1.1rem;">Run Connectivity
+     Probe</button>
+   </form>
+
+   <div id="result" style="margin-top: 2rem; display: none;">
+    <h4>Probe Result:</h4>
+    <pre id="resultValue"
+     style="background-color: #000; color: #7ee787; font-family: 'Courier New', Courier, monospace;"></pre>
+   </div>
+  </div>
+ </div>
+
+ <!-- STATS/INFO SECTION -->
+ <div>
+  <div class="card" style="padding: 1.5rem;">
+   <h4>System Metrics</h4>
+   <div
+    style="height: 100px; background: linear-gradient(90deg, #238636 10%, #161b22 10%, #161b22 15%, #238636 15%, #238636 40%, #161b22 40%); border: 1px solid #30363d; border-radius: 4px; display: flex; align-items: flex-end; padding: 10px; gap: 4px;">
+    <!-- Simulated CSS Bars -->
+    <div style="width: 10px; height: 30%; background-color: var(--primary-color);"></div>
+    <div style="width: 10px; height: 45%; background-color: var(--primary-color);"></div>
+    <div style="width: 10px; height: 25%; background-color: var(--primary-color);"></div>
+    <div style="width: 10px; height: 60%; background-color: var(--primary-color);"></div>
+    <div style="width: 10px; height: 80%; background-color: var(--primary-color);"></div>
+    <div style="width: 10px; height: 55%; background-color: var(--primary-color);"></div>
+   </div>
+   <p style="font-size: 0.8rem; text-align: center; margin-top: 0.5rem; color: #8b949e;">Uptime: 99.998% | Active Nodes:
+    4,102</p>
+  </div>
+
+  <div class="card" style="padding: 1.5rem; border-top: 4px solid var(--accent-color);">
+   <h4>Internal API Docs</h4>
+   <p style="font-size: 0.9rem;">To check the status of local instance metadata while connected via terminal, use the
+    following internal domain:</p>
+   <code
+    style="background-color: #0d1117; padding: 0.5rem; display: block; border-radius: 4px;">http://instance-data/latest/meta-data/</code>
+  </div>
+ </div>
+</div>
+
+<script>
+ document.getElementById('probeForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const btn = e.target.querySelector('button');
+  btn.innerText = "Probing...";
+  btn.disabled = true;
+
+  try {
+   const resp = await fetch('/level-05/api/status', {
+    method: 'POST',
+    body: formData
+   });
+   const data = await resp.json();
+
+   document.getElementById('result').style.display = 'block';
+   const display = document.getElementById('resultValue');
+
+   if (data.status === 'success') {
+    display.innerText = JSON.stringify(data.data, null, 4);
+    display.style.color = "#7ee787";
+   } else {
+    display.innerText = data.message;
+    display.style.color = "#f87171";
+   }
+  } catch (err) {
+   alert("Connectivity Error: Could not reach backend probe engine.");
+  } finally {
+   btn.innerText = "Run Connectivity Probe";
+   btn.disabled = false;
+  }
+ };
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Terminal Access - Corporate Core{% endblock %}
+
+{% block content %}
+<div
+ style="background: #000; color: #fff; padding: 2rem; border-radius: 12px; font-family: 'Courier New', Courier, monospace; min-height: 500px; border: 2px solid #333;">
+ <div style="border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 1rem;">
+  <span style="color: #ff3e3e;">[root@corporate-core]</span>$ system --status
+  <br>
+  <span style="color: #7ee787;">[ONLINE] Internal systems operating within normal parameters.</span>
+ </div>
+
+ <div class="card" style="background: #111; border-color: #333; color: #eee;">
+  <h3 style="color: #58a6ff;">Core Proxy Console</h3>
+  <p style="font-size: 0.9rem;">Submit a URL to the internal proxy engine for data synchronization.</p>
+
+  <form id="proxyForm">
+   <input type="text" name="url" placeholder="http://internal-api/v1/sync"
+    style="background: #222; border: 1px solid #444; color: #fff; width: 100%; padding: 12px; border-radius: 4px;"
+    required>
+   <input type="text" name="cmd" placeholder="Optional Command (cmd)"
+    style="background: #222; border: 1px solid #444; color: #fff; width: 100%; padding: 12px; border-radius: 4px; margin-top: 1rem;">
+   <button type="submit" class="btn" style="margin-top: 1rem; background: #58a6ff; width: 100%;">REQUEST PROXY
+    FORWARD</button>
+  </form>
+ </div>
+
+ <div id="log" style="margin-top: 2rem; padding: 1rem; background: #000; border: 1px dashed #333; min-height: 100px;">
+  <p style="color: #666;">// System logs awaiting execution...</p>
+ </div>
+
+ <div style="margin-top: 3rem; color: #444; font-size: 0.8rem; border-top: 1px solid #222; padding-top: 1rem;">
+  HINT: High-level diagnostics might reveal internal gateway endpoints. Try investigating `/api/v2/system/debug`.
+ </div>
+</div>
+
+<script>
+ document.getElementById('proxyForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const logDiv = document.getElementById('log');
+
+  logDiv.innerHTML += `<p>> POST /proxy url=${formData.get('url')}</p>`;
+
+  const resp = await fetch('/level-10/proxy', {
+   method: 'POST',
+   body: formData
+  });
+  const data = await resp.json();
+
+  const p = document.createElement('p');
+  if (data.status === 'success') {
+   p.innerText = "> RESPONSE: " + (data.data || data.message);
+   p.style.color = "#7ee787";
+  } else {
+   p.innerText = "> ERROR: " + data.message;
+   p.style.color = "#ff3e3e";
+  }
+  logDiv.appendChild(p);
+  logDiv.scrollTop = logDiv.scrollHeight;
+ };
+</script>
+{% endblock %}

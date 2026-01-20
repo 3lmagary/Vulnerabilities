@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Analyst Labs - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>🛡️ Lab Suite</h2>
+        <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="/level-01" class="nav-link {% if '/level-01' in request.path %}active{% endif %}">Level 01: Startup</a>
+        <a href="/level-02" class="nav-link {% if '/level-02' in request.path %}active{% endif %}">Level 02: Employee Dir</a>
+        <a href="/level-03" class="nav-link {% if '/level-03' in request.path %}active{% endif %}">Level 03: Stock Manager</a>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

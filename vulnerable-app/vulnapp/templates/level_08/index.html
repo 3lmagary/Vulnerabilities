@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}NetArmor Infrastructure Health{% endblock %}
+
+{% block content %}
+<div
+ style="background-color: #0c0e14; padding: 2rem; border-radius: 8px; margin-bottom: 2rem; border-left: 6px solid #ff4b2b; font-family: 'Courier New', Courier, monospace;">
+ <h1 style="color: #ff4b2b; margin: 0;">NETARMOR MONITOR v4.9</h1>
+ <p style="color: #a0a0a0; margin: 0.5rem 0;">Diagnostic Utility [INTERNAL USE ONLY]</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+ <!-- LEFT COLUMN -->
+ <div class="card" style="background: #161b22; border: 1px solid #30363d;">
+  <h3>Network Diagnostic Console</h3>
+  <p style="font-size: 0.9rem; color: #8b949e;">Enter destination endpoint to run ICMP ping and port availability check.
+  </p>
+
+  <form id="diagForm">
+   <label style="color: #c9d1d9;">Remote Endpoint / API / Local Node</label>
+   <input type="text" name="endpoint" placeholder="http://api.internal/health"
+    style="background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; width: 100%; padding: 12px; border-radius: 6px;"
+    required>
+
+   <div
+    style="margin: 1.5rem 0; padding: 1rem; background: #21262d; border-radius: 6px; font-size: 0.8rem; border: 1px dashed #f85149;">
+    <p style="color: #f85149; margin: 0;">⚠️ <strong>Firewall Rule Active:</strong> Anti-SSRF Protection (Module 8).
+     Blocked ranges: Loopback, Localhost, Private RFC1918, Link-Local.</p>
+   </div>
+
+   <button type="submit" class="btn" style="background: #ff4b2b; width: 100%; color: #fff; font-weight: bold;">EXECUTE
+    DIAGNOSTIC</button>
+  </form>
+ </div>
+
+ <!-- RIGHT COLUMN -->
+ <div class="card" style="background: #0d1117; border: 1px solid #30363d;">
+  <h3 style="color: #58a6ff;">Diagnostic Log</h3>
+  <div id="output"
+   style="background: #000; height: 300px; border-radius: 6px; padding: 1rem; overflow-y: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; color: #39ff14;">
+   <p>> System ready.</p>
+   <p>> NetArmor Firewall initialized.</p>
+   <p>> Awaiting input...</p>
+  </div>
+ </div>
+</div>
+
+<div class="card" style="margin-top: 2rem; background: #161b22; border: 1px solid #30363d;">
+ <h4>Developer Technical Notes</h4>
+ <p style="font-size: 0.85rem; color: #8b949e;">The internal configuration server is currently running at port **9090**
+  on the local master node for troubleshooting. Ensure all connectivity tests pass before updating the global policy.
+ </p>
+</div>
+
+<script>
+ document.getElementById('diagForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const outputDiv = document.getElementById('output');
+
+  // Add "command" to log
+  const p = document.createElement('p');
+  p.innerText = "> running diag on " + formData.get('endpoint') + "...";
+  outputDiv.appendChild(p);
+
+  const resp = await fetch('/level-08/api/diag', {
+   method: 'POST',
+   body: formData
+  });
+  const data = await resp.json();
+
+  const resP = document.createElement('p');
+  if (data.status === 'success') {
+   resP.innerText = data.output;
+  } else {
+   resP.innerText = "ERROR: " + data.message;
+   resP.style.color = "#ff4b2b";
+  }
+  outputDiv.appendChild(resP);
+  outputDiv.scrollTop = outputDiv.scrollHeight;
+ };
+</script>
+{% endblock %}

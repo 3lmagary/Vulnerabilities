@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Order Details #{{ order_id }} - ShopPrime{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+  <h2 style="margin: 0;">Order #{{ order_id }}</h2>
+  <span class="badge" style="background: #e0f2fe; color: #0369a1;">{{ order.status }}</span>
+ </div>
+
+ <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+  <p><strong>Item:</strong> {{ order.item }}</p>
+  <p><strong>Price:</strong> {{ order.price }}</p>
+  <p><strong>Shipping Address:</strong> {{ order.address }}</p>
+  <p><strong>Customer:</strong> {{ order.user }}</p>
+ </div>
+
+ <div style="border-top: 1px solid #e2e8f0; padding-top: 1.5rem;">
+  <h3>Order Management</h3>
+  <p style="font-size: 0.9rem; color: #64748b;">Update your order status or request cancellation.</p>
+
+  <form id="updateForm" style="display: flex; gap: 1rem; align-items: center;">
+   <input type="hidden" name="order_id" value="{{ order_id }}">
+   <select name="status" style="padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; flex-grow: 1;">
+    <option value="Pending" {% if order.status=='Pending' %}selected{% endif %}>Pending</option>
+    <option value="Shipped" {% if order.status=='Shipped' %}selected{% endif %}>Shipped</option>
+    <option value="Delivered" {% if order.status=='Delivered' %}selected{% endif %}>Delivered</option>
+    <option value="Cancelled" {% if order.status=='Cancelled' %}selected{% endif %}>Cancelled</option>
+   </select>
+   <button type="submit" class="btn">Update Status</button>
+  </form>
+  <div id="msg" style="margin-top: 1rem; font-weight: bold;"></div>
+ </div>
+
+ <div style="margin-top: 2rem; text-align: center;">
+  <a href="/level-07" style="color: #64748b; text-decoration: none;">← Back to My Orders</a>
+ </div>
+</div>
+
+<script>
+ document.getElementById('updateForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const resp = await fetch('/level-07/order/update-status', {
+   method: 'POST',
+   body: formData
+  });
+  const data = await resp.json();
+  const msgDiv = document.getElementById('msg');
+  msgDiv.innerText = data.message;
+  msgDiv.style.color = data.status === 'success' ? '#166534' : '#991b1b';
+ };
+</script>
+{% endblock %}

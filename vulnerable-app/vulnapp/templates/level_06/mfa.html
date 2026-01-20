@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Authentication Required - Nexus Bank{% endblock %}
+
+{% block content %}
+<div
+ style="max-width: 450px; margin: 6rem auto; background: #f8fafc; color: #0f172a; padding: 2.5rem; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+ <div style="font-size: 3rem; margin-bottom: 1.5rem;">📱</div>
+ <h2 style="margin-bottom: 1rem;">Multi-Factor Authentication</h2>
+ <p style="color: #64748b; margin-bottom: 2rem;">A 6-digit code has been sent to your registered mobile device ending in
+  **88. Please enter it below to verify your identity.</p>
+
+ <div style="display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 2rem;">
+  <input type="text" maxlength="1"
+   style="width: 50px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid #cbd5e1; border-radius: 8px;">
+  <input type="text" maxlength="1"
+   style="width: 50px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid #cbd5e1; border-radius: 8px;">
+  <input type="text" maxlength="1"
+   style="width: 50px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid #cbd5e1; border-radius: 8px;">
+  <input type="text" maxlength="1"
+   style="width: 50px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid #cbd5e1; border-radius: 8px;">
+  <input type="text" maxlength="1"
+   style="width: 50px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid #cbd5e1; border-radius: 8px;">
+  <input type="text" maxlength="1"
+   style="width: 50px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid #cbd5e1; border-radius: 8px;">
+ </div>
+
+ <button class="btn" style="width: 100%; background: #1a365d; margin-bottom: 1rem;"
+  onclick="alert('Verification Failed: Incorrect MFA Code.')">VERIFY CODE</button>
+ <a href="#" style="color: #1a365d; font-size: 0.9rem; text-decoration: none;">Resend Code (wait 54s)</a>
+
+ <div
+  style="margin-top: 2rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.8rem; color: #1e40af; text-align: left;">
+  💡 <strong>Enterprise Tip:</strong> If your mobile app is offline, you can use your hardware security token to
+  generate a backup key.
+ </div>
+</div>
+{% endblock %}

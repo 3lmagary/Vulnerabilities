@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Enterprise ERP Center{% endblock %}
+
+{% block content %}
+<div
+ style="background: #1e1b4b; color: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 2rem; border-bottom: 5px solid #4f46e5;">
+ <h1 style="margin: 0;">Enterprise ERP v12.0 🏢</h1>
+ <p style="color: #c7d2fe;">Unified Business Management & Resource Planning</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 250px 1fr; gap: 2rem;">
+ <!-- SIDE NAV -->
+ <div class="card" style="padding: 1rem; background: #f8fafc; border: 1px solid #e2e8f0;">
+  <p style="font-weight: bold; color: #1e1b4b;">MODULES</p>
+  <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+   <a href="#" class="nav-link active">📊 Dashboard</a>
+   <a href="#" class="nav-link">📦 Inventory</a>
+   <a href="#" class="nav-link">💰 Accounting</a>
+   <a href="#" class="nav-link">🤝 CRM</a>
+   <a href="/level-09/admin/dashboard" class="nav-link" style="color: #dc2626; font-weight: bold;">🚨 Admin Portal</a>
+  </nav>
+ </div>
+
+ <!-- MAIN DASHBOARD -->
+ <div>
+  <div class="card">
+   <h3>User Information</h3>
+   <div id="userInfo" style="background: #f1f5f9; padding: 1rem; border-radius: 6px;">
+    Loading profile...
+   </div>
+  </div>
+
+  <div class="card">
+   <h3>System Status</h3>
+   <p><strong>Environment:</strong> Production</p>
+   <p><strong>Region:</strong> Northern Europe (EU-1)</p>
+   <p><strong>Last Backup:</strong> 42 minutes ago</p>
+  </div>
+ </div>
+</div>
+
+<script>
+ async function loadUser() {
+  const resp = await fetch('/level-09/api/user/info');
+  const data = await resp.json();
+  document.getElementById('userInfo').innerHTML = `
+        <p><strong>Username:</strong> ${data.username}</p>
+        <p><strong>Role:</strong> <span style="color: #2563eb;">${data.role}</span></p>
+        <p><strong>Org ID:</strong> ${data.org_id}</p>
+        <p><strong>Dept:</strong> ${data.department}</p>
+    `;
+ }
+ loadUser();
+</script>
+{% endblock %}

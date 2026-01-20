@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}GlobalLogic HR Solutions{% endblock %}
+
+{% block content %}
+<div
+ style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 4rem; border-radius: 12px; margin-bottom: 2rem; border-bottom: 4px solid var(--primary-color);">
+ <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">GlobalLogic HR Solutions 🌐</h1>
+ <p style="font-size: 1.2rem; color: #94a3b8;">Empowering the modern workforce with seamless, secure, and intuitive HR
+  management.</p>
+</div>
+
+<div class="card">
+ <h3>Professional Excellence. Delivered.</h3>
+ <p>We provide a centralized platform for all your employment needs, from payroll management to benefits enrollment.
+  Join thousands of world-class companies trust GlobalLogic.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+ <div class="card">
+  <h4>🔒 Security First</h4>
+  <p>Our infrastructure uses enterprise-grade encryption and strictly enforced access control policies to sleep soundly
+   at night.</p>
+ </div>
+ <div class="card">
+  <h4>⚡ High Performance</h4>
+  <p>Real-time analytics and instant document retrieval for your entire organization.</p>
+ </div>
+</div>
+
+<div class="card" style="text-align: center; margin-top: 2rem; border: 1px dashed var(--primary-color);">
+ <h3>Existing Employee?</h3>
+ <p>Access your personalized portal and manage your professional profile.</p>
+ <a href="/level-04/dashboard" class="btn">Employee Login (Single-Sign-On)</a>
+</div>
+
+<footer
+ style="margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--border-color); color: #475569; text-align: center;">
+ © 2026 GlobalLogic HR Solutions. All rights reserved. | <a href="/level-04/legal" style="color: #475569;">Privacy
+  Policy</a> | <a href="/level-04/contact" style="color: #475569;">Contact Support</a>
+</footer>
+{% endblock %}

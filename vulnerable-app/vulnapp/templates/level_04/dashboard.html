@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Employee Dashboard - GlobalLogic{% endblock %}
+
+{% block content %}
+<div
+ style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+ <div>
+  <h1 style="margin: 0;">Welcome, {{ user.name }}</h1>
+  <p style="color: var(--primary-color); margin: 0;">{{ user.position }} | {{ user.dept }} Department</p>
+ </div>
+ <div style="text-align: right;">
+  <span class="badge badge-easy">Active Session</span>
+ </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem;">
+ <!-- LEFT SIDEBAR -->
+ <div>
+  <div class="card" style="padding: 1rem;">
+   <p
+    style="font-weight: bold; color: var(--primary-color); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+    QUICK LINKS</p>
+   <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+    <a href="#" class="nav-link active">🏠 Overview</a>
+    <a href="/level-04/payroll/{{ user.id }}" class="nav-link">📄 My Payroll & Tax</a>
+    <a href="#" class="nav-link">🌴 Leave Requests</a>
+    <a href="#" class="nav-link">🩺 Benefits</a>
+    <a href="#" class="nav-link">⚙️ Account Settings</a>
+   </nav>
+  </div>
+
+  <div class="card" style="padding: 1rem; margin-top: 1rem;">
+   <p style="font-weight: bold;">📣 Company News</p>
+   <p style="font-size: 0.9rem; color: #94a3b8;">The annual Q1 Finance meeting is scheduled for next Friday. Attendance
+    is mandatory for all senior staff.</p>
+  </div>
+ </div>
+
+ <!-- MAIN DASHBOARD -->
+ <div>
+  <div class="card">
+   <h3>Update Your Profile</h3>
+   <p>Ensure your contact information is up to date.</p>
+   <form id="profileForm">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+     <div>
+      <label>Full Name</label>
+      <input type="text" name="name" value="{{ user.name }}">
+     </div>
+     <div>
+      <label>Position</label>
+      <input type="text" name="position" value="{{ user.position }}" readonly style="opacity: 0.6;">
+     </div>
+     <div>
+      <label>Base Salary</label>
+      <input type="text" value="{{ user.salary }}$" readonly style="opacity: 0.6;">
+     </div>
+     <div>
+      <label>Department</label>
+      <input type="text" name="dept" value="{{ user.dept }}">
+     </div>
+    </div>
+    <button type="submit" class="btn" style="margin-top: 1rem;">Update Profile Information</button>
+   </form>
+   <div id="msg" style="margin-top: 1rem; font-weight: bold;"></div>
+  </div>
+
+  <div class="card">
+   <h3>Recent Activity</h3>
+   <p style="color: #94a3b8;">No recent notifications.</p>
+  </div>
+ </div>
+</div>
+
+<script>
+ document.getElementById('profileForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const resp = await fetch('/level-04/profile-update', {
+   method: 'POST',
+   body: formData
+  });
+  const data = await resp.json();
+  const msgDiv = document.getElementById('msg');
+  msgDiv.innerText = data.message;
+  msgDiv.style.color = data.status === 'success' ? 'var(--accent-color)' : 'var(--primary-color)';
+ };
+</script>
+{% endblock %}
