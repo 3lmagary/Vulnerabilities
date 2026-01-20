@@ -1,30 +1,51 @@
-# Vulnerabilities Repository
+# 🛡️ Vulnerabilities Documentation & Labs
 
-A concise collection of web application vulnerability labs, write-ups, and screenshots intended for learning and documentation.
+![Security](https://img.shields.io/badge/Security-Pentesting-red.svg)
+![Status](https://img.shields.io/badge/Status-In--Progress-orange.svg)
+![Labs](https://img.shields.io/badge/Labs-40%2B-blue.svg)
 
-## Purpose
-
-This repository stores practical labs and explanations for common web vulnerabilities. It is meant as a study guide and reference for learners and security researchers.
-
-## Contents
-
-* `access-control/` — **one exploit** example lab: environment, writeup, screenshots, and scripts.
-* `other-vulnerabilities/` — additional labs and examples.
-* `assets/` — shared images and resources.
-
-## How to use
-
-1. Clone the repository.
-2. Open the lab folder you want to run (each lab should include a README with setup instructions).
-3. Follow the lab README (some labs include Docker files or setup scripts for easy reproduction).
-
-## Contribution
-
-Contributions are welcome. Please add new labs in their own folder and include: a clear README, writeup, screenshots, and any scripts.
-
-## License
-
-Suggested: MIT License — add a `LICENSE` file if you want to make the repo open-source.
+مستودع منظم وشامل لتوثيق ثغرات تطبيقات الويب، يتضمن شروحات مفصلة، منهجيات اختبار، وحلول لمختبرات (Labs) عملية.
 
 ---
 
+## 📂 أقسام المستودع (Core Modules)
+
+المستودع مقسم بناءً على تصنيفات الـ OWASP والثغرات الشائعة:
+
+| القسم | الوصف | المحتوى |
+| :--- | :--- | :--- |
+| [🔐 Authentication](authentication/) | ثغرات المصادقة، MFA، والهجمات الغاشمة. | شروحات + 14 مختبر |
+| [🚫 Access Control](access-control/) | ثغرات الـ IDOR، تصعيد الصلاحيات، وكسر الأذونات. | شروحات + 14 مختبر |
+| [💉 Cross-Site Scripting](cross-site-scripting/) | ثغرات الـ XSS بأنواعها (Reflected, Stored, DOM). | شروحات + 15 مختبر |
+| [🌐 SSRF](ssrf/) | ثغرات طلب التزوير من جانب الخادم. | شروحات + 3 مختبرات |
+| [📂 Information Disclosure](information-disclosure/) | كشف المعلومات الحساسة والمفاتيح المسربة. | شروحات + 5 مختبرات |
+| [📝 General Notes](notes/) | قاموس المصطلحات، أساسيات HTTP، وملاحظات عامة. | مراجع ومفاهيم |
+
+---
+
+## 🚀 كيف تستفيد من هذا المستودع؟
+
+1. **البداية:** ابدأ بقسم `notes` لفهم الأساسيات.
+2. **التطبيق العملي:** انتقل إلى أي ثغرة (مثلاً `authentication`) واقرأ الـ `README.md` الخاص بها.
+3. **المختبرات (Labs):** ستجد داخل كل قسم مجلد `labs` يحتوي على توثيق لحل مختبرات PortSwigger وغيرها.
+4. **الإضافة:** إذا أردت إضافة مختبر جديد، استخدم [LAB_TEMPLATE.md](LAB_TEMPLATE.md).
+
+---
+
+## 🛠️ الأدوات المستخدمة بشكل أساسي
+
+- **Burp Suite Professional** (الاعتراض والتحليل)
+- **Ffuf** (الاكتشاف والهجمات الغاشمة)
+- **Subfinder / Amass** (جمع معلومات النطاقات)
+- **John the Ripper / Hashcat** (كسر التجزئات)
+
+---
+
+## 📌 ملاحظات
+
+- جميع الصور والرسومات التوضيحية موجودة داخل مجلدات `assets` في كل قسم.
+- تم توحيد التسميات والروابط لتسهيل التصفح عبر المتصفح أو تطبيقات الملاحظات مثل Obsidian.
+
+---
+> [!NOTE]
+> هذا المستودع مخصص للأغراض التعليمية فقط. لا تستخدم هذه المعلومات خارج إطار قانوني وأخلاقي.
