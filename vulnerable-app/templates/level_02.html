@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Level 02 - Employee Directory{% endblock %}
+
+{% block content %}
+<div class="card">
+ <h1>👥 MultiCorp Employee Directory</h1>
+ <p>Search and manage employee profiles. Access to financial data is restricted to HR managers.</p>
+</div>
+
+<div class="card">
+ <h3>Public Employees</h3>
+ <table style="width: 100%; border-collapse: collapse;">
+  <thead>
+   <tr style="border-bottom: 1px solid var(--border-color); text-align: left;">
+    <th style="padding: 1rem;">ID</th>
+    <th style="padding: 1rem;">Name</th>
+    <th style="padding: 1rem;">Action</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td style="padding: 1rem;">1</td>
+    <td style="padding: 1rem;">Alice Johnson</td>
+    <td style="padding: 1rem;"><button class="btn" onclick="fetchEmp(1)">View Profile</button></td>
+   </tr>
+   <tr>
+    <td style="padding: 1rem;">2</td>
+    <td style="padding: 1rem;">Bob Smith</td>
+    <td style="padding: 1rem;"><button class="btn" onclick="fetchEmp(2)">View Profile</button></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+
+<div id="profile-card" class="card" style="display: none;">
+ <h3 id="emp-name"></h3>
+ <p>Role: <span id="emp-role"></span></p>
+ <p>Salary: <span id="emp-salary" style="filter: blur(4px);"></span> (Locked)</p>
+ <div id="emp-secret" style="color: var(--accent-color); font-weight: bold; margin-top: 1rem;"></div>
+</div>
+
+<script>
+ async function fetchEmp(id) {
+  const resp = await fetch(`/api/employee/${id}`);
+  const data = await resp.json();
+  if (data.name) {
+   document.getElementById('profile-card').style.display = 'block';
+   document.getElementById('emp-name').innerText = data.name;
+   document.getElementById('emp-role').innerText = data.role;
+   document.getElementById('emp-salary').innerText = data.salary;
+   document.getElementById('emp-secret').innerText = data.secret || "";
+  }
+ }
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Level 01 - Startup Portal{% endblock %}
+
+{% block content %}
+<div class="card">
+ <h1>🚀 Startup Cloud Portal v1.0</h1>
+ <p>Welcome to our secure gateway. If you are an employee, please log in below.</p>
+ <p><i>Note: Our developer team left some debug features active for maintenance.</i></p>
+</div>
+
+<div class="card" style="max-width: 400px; margin: 0 auto;">
+ <h3>Member Login</h3>
+ <form action="/level-01/login" method="POST">
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" placeholder="wiener" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" placeholder="peter" required>
+
+  <input type="hidden" name="role" value="user">
+
+  <button type="submit" class="btn" style="width: 100%;">Sign In</button>
+ </form>
+</div>
+
+<div class="card" style="margin-top: 2rem;">
+ <h4>System Status</h4>
+ <p>Environment: <span class="badge badge-easy">PRODUCTION</span></p>
+ <a href="/level-01/config" style="color: var(--primary-color);">View Public Connectivity Config</a>
+</div>
+{% endblock %}

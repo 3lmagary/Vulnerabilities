@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Level 01{% endblock %}
+
+{% block content %}
+<div class="card" style="border-left: 5px solid var(--accent-color);">
+ <h1 style="color: var(--accent-color);">🛡️ Admin Dashboard</h1>
+ <p>Welcome back, <strong>{{ user }}</strong>. You are logged in with <strong>Administrator</strong> privileges.</p>
+</div>
+
+<div class="card">
+ <h3>System Secrets</h3>
+ <p>Current Flag: <span class="badge badge-hard">FLAG{AUTH_LOGIC_BYPASS_SUCCESS}</span></p>
+ <p>Internal Server Status: <span style="color: var(--accent-color);">All systems operational.</span></p>
+</div>
+
+<div class="card">
+ <h3>Administrative Actions</h3>
+ <button class="btn" style="background-color: var(--border-color);">Export Database (CSV)</button>
+ <button class="btn" style="background-color: var(--border-color);">Reboot System</button>
+ <a href="/level-01" class="btn" style="background-color: #da3633; text-decoration: none;">Logout</a>
+</div>
+{% endblock %}

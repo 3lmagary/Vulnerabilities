@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Level 03 - Stock Manager{% endblock %}
+
+{% block content %}
+<div class="card">
+ <h1>📦 Global Inventory & Logistics</h1>
+ <p>Monitor warehouse stock levels by connecting to our geo-distributed inventory servers.</p>
+</div>
+
+<div class="card" style="max-width: 600px;">
+ <h3>Check Item Availability</h3>
+ <p>Item: **Secure Storage Module - XFR-9000**</p>
+
+ <form action="/check-stock" method="POST">
+  <label for="server">Select Warehouse Server</label>
+  <select name="stockApi" id="server">
+   <option value="http://stock.logistics-corp.internal/london">London (Main)</option>
+   <option value="http://stock.logistics-corp.internal/nyc">New York</option>
+   <option value="http://stock.logistics-corp.internal/tokyo">Tokyo</option>
+  </select>
+
+  <p><i>Note: The system only allows connection to internal domains.</i></p>
+
+  <button type="submit" class="btn">Fetch Stock Data</button>
+ </form>
+</div>
+
+<div class="card">
+ <h4>Network Policy</h4>
+ <p>All stock checks are performed via an internal proxy located at `10.0.0.50`.</p>
+</div>
+{% endblock %}

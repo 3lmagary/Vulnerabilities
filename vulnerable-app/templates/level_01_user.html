@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile - Level 01{% endblock %}
+
+{% block content %}
+<div class="card">
+ <h1>Welcome, {{ user }}!</h1>
+ <p>You have successfully logged into the Startup Portal.</p>
+ <p>Account Type: <span class="badge badge-easy">Standard User</span></p>
+</div>
+
+<div class="card">
+ <h3>Restricted Area</h3>
+ <p style="color: #8b949e;">⚠️ You do not have permission to view administrative settings or system logs.</p>
+ <button class="btn" style="opacity: 0.5; cursor: not-allowed;">Admin Panel</button>
+ <a href="/level-01" class="btn" style="background-color: #da3633; text-decoration: none; margin-left: 1rem;">Logout</a>
+</div>
+{% endblock %}

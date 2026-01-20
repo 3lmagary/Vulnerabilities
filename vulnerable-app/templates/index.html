@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Security Analyst Lab Suite 🎯</h1>
+<p>This is a realistic environment designed to test your penetration testing skills. Unlike traditional walkthroughs,
+ here you must discover the vulnerabilities through analysis.</p>
+
+<div class="card">
+ <h3>🚀 Level 01: The Startup Portal</h3>
+ <span class="badge badge-easy">EASY</span>
+ <p>A new tech startup just launched their portal. They say it's "unhackable" because they use a custom login system.
+  Can you prove them wrong?</p>
+ <a href="/level-01" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>👥 Level 02: Employee Management</h3>
+ <span class="badge badge-medium">MEDIUM</span>
+ <p>A corporate employee directory. Rumor has it that sensitive financial data is stored here. Can you find a way to
+  access restricted profiles?</p>
+ <a href="/level-02" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>📦 Level 03: Global Stock Manager</h3>
+ <span class="badge badge-hard">HARD</span>
+ <p>A global logistics system that integrates with internal inventory servers. Security is tighter here. Can you break
+  through the network boundaries?</p>
+ <a href="/level-03" class="btn">Start Level</a>
+</div>
+{% endblock %}
