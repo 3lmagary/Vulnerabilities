@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Security Analyst Lab Suite 🎯</h1>
+<p>This is a realistic environment designed to test your penetration testing skills. Unlike traditional walkthroughs,
+ here you must discover the vulnerabilities through analysis.</p>
+
+<div class="card">
+ <h3>🚀 Level 01: The Startup Portal</h3>
+ <span class="badge badge-easy">EASY</span>
+ <p>A new tech startup just launched their portal. Can you find the auth bypass and information leak?</p>
+ <a href="/level-01" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>👥 Level 02: Employee Management</h3>
+ <span class="badge badge-medium">MEDIUM</span>
+ <p>An employee directory with realistic IDOR and data exposure vulnerabilities.</p>
+ <a href="/level-02" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>📦 Level 03: Global Stock Manager</h3>
+ <span class="badge badge-hard">HARD</span>
+ <p>A global logistics system featuring SSRF with basic filter bypasses.</p>
+ <a href="/level-03" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🌐 Level 04: HR Solutions Portal</h3>
+ <span class="badge badge-medium">REALISTIC</span>
+ <p>A complex HR system. Exploit Access Control and Mass Assignment vulnerabilities.</p>
+ <a href="/level-04" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>☁️ Level 05: Cloud API Explorer</h3>
+ <span class="badge badge-hard">REALISTIC</span>
+ <p>Bypass advanced SSRF filters to reach internal cloud metadata services.</p>
+ <a href="/level-05" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🏦 Level 06: Nexus Digital Bank</h3>
+ <span class="badge badge-hard">ADVANCED AUTH</span>
+ <p>Exploit a sophisticated MFA logic flaw to compromise high-value banking accounts.</p>
+ <a href="/level-06" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🛒 Level 07: ShopPrime Enterprise</h3>
+ <span class="badge badge-medium">ACCESS CONTROL</span>
+ <p>Manipulate orders and view private user data in a large-scale e-commerce platform.</p>
+ <a href="/level-07" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🛡️ Level 08: NetArmor Monitor</h3>
+ <span class="badge badge-hard">ADVANCED SSRF</span>
+ <p>The ultimate firewall challenge. Bypass multi-layered filters using advanced SSRF techniques.</p>
+ <a href="/level-08" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🏢 Level 09: Enterprise ERP</h3>
+ <span class="badge badge-hard">PRIVILEGE ESCALATION</span>
+ <p>Reach the master admin dashboard in a massive business resource management system.</p>
+ <a href="/level-09" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🔒 Level 10: The Ultimate Vault</h3>
+ <span class="badge badge-hard">CHAINING</span>
+ <p>The final challenge. Chain multiple vulnerabilities to achieve total system compromise.</p>
+ <a href="/level-10" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>🛡️ Level 11: Smart Filter Bypass</h3>
+ <span class="badge badge-hard">EXPERT SSRF</span>
+ <p>Bypass sophisticated whitelist-based input filters using advanced URL encoding techniques.</p>
+ <a href="/level-11" class="btn">Start Level</a>
+</div>
+
+<div class="card">
+ <h3>📊 Level 12: Blind SSRF Out-of-Band</h3>
+ <span class="badge badge-hard">EXPERT SSRF</span>
+ <p>Exploit an invisible SSRF vulnerability using out-of-band detection tools like Burp Collaborator.</p>
+ <a href="/level-12" class="btn">Start Level</a>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Analyst Labs - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>🛡️ Lab Suite</h2>
+        <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="/level-01" class="nav-link {% if '/level-01' in request.path %}active{% endif %}">Level 01: Startup</a>
+        <a href="/level-02" class="nav-link {% if '/level-02' in request.path %}active{% endif %}">Level 02: Employee
+            Dir</a>
+        <a href="/level-03" class="nav-link {% if '/level-03' in request.path %}active{% endif %}">Level 03: Stock
+            Manager</a>
+        <a href="/level-04" class="nav-link {% if '/level-04' in request.path %}active{% endif %}">Level 04: HR
+            Solutions</a>
+        <a href="/level-05" class="nav-link {% if '/level-05' in request.path %}active{% endif %}">Level 05: Cloud
+            Explorer</a>
+        <a href="/level-06" class="nav-link {% if '/level-06' in request.path %}active{% endif %}">Level 06: Bank
+            Vault</a>
+        <a href="/level-07" class="nav-link {% if '/level-07' in request.path %}active{% endif %}">Level 07:
+            E-Commerce</a>
+        <a href="/level-08" class="nav-link {% if '/level-08' in request.path %}active{% endif %}">Level 08:
+            NetArmor</a>
+        <a href="/level-09" class="nav-link {% if '/level-09' in request.path %}active{% endif %}">Level 09: Enterprise
+            ERP</a>
+        <a href="/level-10" class="nav-link {% if '/level-10' in request.path %}active{% endif %}">Level 10: The
+            Vault</a>
+        <a href="/level-11" class="nav-link {% if '/level-11' in request.path %}active{% endif %}">Level 11: Whitelist
+            Bypass</a>
+        <a href="/level-12" class="nav-link {% if '/level-12' in request.path %}active{% endif %}">Level 12: Blind
+            SSRF</a>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
