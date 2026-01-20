@@ -29,7 +29,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Ffuf Enumeration](assets/Screenshot%20From%202025-10-18%2015-58-21.png)
+![Ffuf Enumeration](../assets/Screenshot%20From%202025-10-18%2015-58-21.png)
 
 ---
 

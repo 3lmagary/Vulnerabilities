@@ -22,7 +22,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Chat Leak](assets/Screenshot-From-2025-10-17-21-35-31.png)
+![Chat Leak](../assets/Screenshot-From-2025-10-17-21-35-31.png)
 
 ---
 

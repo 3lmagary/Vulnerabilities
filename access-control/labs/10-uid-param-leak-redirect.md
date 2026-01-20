@@ -21,7 +21,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Leakage in Redirect](assets/Screenshot-From-2025-10-17-19-34-14.png)
+![Leakage in Redirect](../assets/Screenshot-From-2025-10-17-19-34-14.png)
 
 ---
 

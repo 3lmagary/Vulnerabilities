@@ -25,7 +25,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Attribute Injection](assets/Screenshot-From-2025-10-17-15-45-43.png)
+![Attribute Injection](../assets/Screenshot-From-2025-10-17-15-45-43.png)
 
 ---
 

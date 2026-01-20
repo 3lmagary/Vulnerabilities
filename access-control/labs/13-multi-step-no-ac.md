@@ -25,8 +25,8 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Upgrade Step 1](assets/Screenshot-From-2025-10-17-22-44-34.png)
-![Upgrade Step 2](assets/Screenshot-From-2025-10-17-22-44-40.png)
+![Upgrade Step 1](../assets/Screenshot-From-2025-10-17-22-44-34.png)
+![Upgrade Step 2](../assets/Screenshot-From-2025-10-17-22-44-40.png)
 
 ---
 

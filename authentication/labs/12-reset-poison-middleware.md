@@ -22,8 +22,8 @@
 
 ## 5. لقطات شاشة (Screenshots)
 
-![Header Injection](assets/Screenshot%20From%202025-10-26%2021-54-21.png)
-![Received Token](assets/Screenshot%20From%202025-10-26%2008-58-58.png)
+![Header Injection](../assets/Screenshot%20From%202025-10-26%2021-54-21.png)
+![Received Token](../assets/Screenshot%20From%202025-10-26%2008-58-58.png)
 
 ---
 

@@ -25,7 +25,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Admin Bypass](assets/Screenshot-From-2025-10-17-12-52-42.png)
+![Admin Bypass](../assets/Screenshot-From-2025-10-17-12-52-42.png)
 
 ---
 

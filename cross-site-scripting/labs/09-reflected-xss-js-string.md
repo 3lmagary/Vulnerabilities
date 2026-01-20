@@ -25,7 +25,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![JS String Break](assets/Screenshot From 2025-11-18 20-02-01.png)
+![JS String Break](../assets/Screenshot From 2025-11-18 20-02-01.png)
 
 ---
 

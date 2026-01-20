@@ -23,7 +23,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Upgrade User](assets/Screenshot-From-2025-10-17-16-44-45.png)
+![Upgrade User](../assets/Screenshot-From-2025-10-17-16-44-45.png)
 
 ---
 

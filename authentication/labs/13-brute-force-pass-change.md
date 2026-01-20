@@ -24,8 +24,8 @@
 
 ## 5. لقطات شاشة (Screenshots)
 
-![Password Change Request](assets/Screenshot%20From%202025-10-26%2022-13-23.png)
-![Attack Success](assets/Screenshot%20From%202025-10-27%2020-55-56.png)
+![Password Change Request](../assets/Screenshot%20From%202025-10-26%2022-13-23.png)
+![Attack Success](../assets/Screenshot%20From%202025-10-27%2020-55-56.png)
 
 ---
 

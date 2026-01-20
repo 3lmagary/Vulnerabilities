@@ -21,7 +21,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![carlos guid](assets/screenshot-from-2025-10-17-17-22-05.png)
+![carlos guid](../assets/screenshot-from-2025-10-17-17-22-05.png)
 
 ---
 

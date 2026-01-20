@@ -23,7 +23,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Password Disclosure](assets/Screenshot-From-2025-10-17-21-01-39.png)
+![Password Disclosure](../assets/Screenshot-From-2025-10-17-21-01-39.png)
 
 ---
 

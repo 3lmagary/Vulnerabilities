@@ -23,7 +23,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![IP Bypass Attack](assets/Screenshot%20From%202025-10-20%2015-21-47.png)
+![IP Bypass Attack](../assets/Screenshot%20From%202025-10-20%2015-21-47.png)
 
 ---
 

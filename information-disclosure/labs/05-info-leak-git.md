@@ -23,7 +23,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Git Disclosure](assets/Screenshot From 2025-11-15 15-16-01.png)
+![Git Disclosure](../assets/Screenshot From 2025-11-15 15-16-01.png)
 
 ---
 

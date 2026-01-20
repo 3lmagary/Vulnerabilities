@@ -24,8 +24,8 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Timing Analysis](assets/Screenshot%20From%202025-10-18%2021-25-40.png)
-![Payload Setup](assets/Screenshot%20From%202025-10-18%2021-05-45.png)
+![Timing Analysis](../assets/Screenshot%20From%202025-10-18%2021-25-40.png)
+![Payload Setup](../assets/Screenshot%20From%202025-10-18%2021-05-45.png)
 
 ---
 

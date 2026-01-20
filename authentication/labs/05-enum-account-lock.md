@@ -23,7 +23,7 @@
 
 ## 5. لقطات الشاشة (Screenshots)
 
-![Account Lock Analysis](assets/Screenshot%20From%202025-10-20%2021-26-36.png)
+![Account Lock Analysis](../assets/Screenshot%20From%202025-10-20%2021-26-36.png)
 
 ---
 

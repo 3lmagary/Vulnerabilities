@@ -27,8 +27,8 @@
 
 ## 5. لقطات شاشة (Screenshots)
 
-![Cookie Decoding](assets/Screenshot%20From%202025-10-24%2015-07-53.png)
-![Intruder Setup](assets/Screenshot%20From%202025-10-24%2015-04-24.png)
+![Cookie Decoding](../assets/Screenshot%20From%202025-10-24%2015-07-53.png)
+![Intruder Setup](../assets/Screenshot%20From%202025-10-24%2015-04-24.png)
 
 ---
 
