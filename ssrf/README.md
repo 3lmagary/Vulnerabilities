@@ -570,5 +570,6 @@ if is_suspicious_pattern(url):
 1. [SSRF أساسي ضد السيرفر المحلي](labs/01-ssrf-localhost.md)
 2. [SSRF أساسي ضد نظام خلفي آخر](labs/02-ssrf-backend.md)
 3. [تجاوز فلتر القائمة السوداء (Blacklist)](labs/03-ssrf-blacklist-bypass.md)
+4. [SSRF عبر Open Redirection](labs/04-ssrf-open-redirect.md)
 
 ---
