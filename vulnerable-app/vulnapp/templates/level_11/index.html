@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div
+ style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #e6edf3;">
+ <div
+  style="background-color: #161b22; border-radius: 12px; padding: 40px; border: 1px solid #30363d; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+  <h1 style="color: #58a6ff; margin: 0 0 10px 0;">Elite Stock Checker 🛡️</h1>
+  <p style="color: #8b949e; font-size: 1.1em; margin-bottom: 30px;">
+   Secure inventory management with strict whitelist-based input filtering.
+  </p>
+
+  <div style="background-color: #0d1117; border-radius: 8px; padding: 25px; border: 1px solid #30363d;">
+   <label for="stockApi" style="display: block; margin-bottom: 10px; font-weight: 600; color: #c9d1d9;">Enter Stock API
+    Endpoint:</label>
+   <input type="text" id="stockApi" placeholder="http://stock.weliketoshop.net/api/v1/stock"
+    style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #30363d; background-color: #161b22; color: #e6edf3; font-family: monospace; margin-bottom: 20px;">
+
+   <button onclick="checkStock()"
+    style="background-color: #238636; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background-color 0.2s;">
+    Check Availability
+   </button>
+  </div>
+
+  <div id="result" style="margin-top: 30px; display: none; padding: 20px; border-radius: 8px;"></div>
+ </div>
+
+ <div
+  style="margin-top: 40px; padding: 20px; background: rgba(88, 166, 255, 0.1); border-left: 4px solid #58a6ff; border-radius: 4px;">
+  <h3 style="margin-top: 0; color: #58a6ff;">Expert Lab Note:</h3>
+  <p style="margin-bottom: 0; line-height: 1.6;">
+   This system validates that the URL belongs to <strong>stock.weliketoshop.net</strong>. Any other destination is
+   blocked by the primary security filter.
+  </p>
+ </div>
+</div>
+
+<script>
+ async function checkStock() {
+  const api = document.getElementById('stockApi').value;
+  const resultDiv = document.getElementById('result');
+
+  resultDiv.style.display = 'block';
+  resultDiv.style.backgroundColor = '#161b22';
+  resultDiv.style.color = '#8b949e';
+  resultDiv.innerHTML = 'Connecting to back-end system...';
+
+  const formData = new FormData();
+  formData.append('stockApi', api);
+
+  try {
+   const response = await fetch('/level-11/api/check-stock', {
+    method: 'POST',
+    body: formData
+   });
+   const data = await response.json();
+
+   if (data.status === 'success') {
+    resultDiv.style.backgroundColor = 'rgba(35, 134, 54, 0.2)';
+    resultDiv.style.color = '#3fb950';
+    resultDiv.innerHTML = `<strong>SUCCESS:</strong> ${data.data}`;
+   } else {
+    resultDiv.style.backgroundColor = 'rgba(248, 81, 73, 0.2)';
+    resultDiv.style.color = '#f85149';
+    resultDiv.innerHTML = `<strong>ERROR:</strong> ${data.message}`;
+   }
+  } catch (e) {
+   resultDiv.innerHTML = 'Network Error: Failed to contact the validation microservice.';
+  }
+ }
+</script>
+{% endblock %}

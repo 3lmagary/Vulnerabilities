@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div
+ style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #e6edf3;">
+ <div
+  style="background-color: #161b22; border-radius: 12px; padding: 40px; border: 1px solid #30363d; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+  <h1 style="color: #ff7b72; margin: 0 0 10px 0;">Product Analytics Engine 📊</h1>
+  <p style="color: #8b949e; font-size: 1.1em; margin-bottom: 30px;">
+   Analyzing traffic sources and user behavior across internal nodes.
+  </p>
+
+  <div style="background-color: #0d1117; border-radius: 8px; padding: 25px; border: 1px solid #30363d;">
+   <p style="margin-bottom: 15px; color: #c9d1d9;">This page automatically fetches product info from the
+    <strong>Referer</strong> to track visit origin.</p>
+   <div
+    style="padding: 15px; background: #161b22; border-radius: 6px; font-family: monospace; border: 1px dashed #30363d;">
+    <span style="color: #79c0ff;">GET</span> /level-12 <br>
+    <span style="color: #8b949e;">Referer:</span> <span style="color: #a5d6ff;"
+     id="curr-referer">https://weliketoshop.net/products?id=1</span>
+   </div>
+  </div>
+
+  <div
+   style="margin-top: 30px; background-color: #0d1117; border-radius: 8px; padding: 25px; border: 1px solid #30363d;">
+   <h3 style="margin-top: 0; color: #c9d1d9;">Manual Tracking Injection:</h3>
+   <label for="trackUrl" style="display: block; margin-bottom: 10px; font-weight: 600; color: #8b949e;">External
+    Analytics Pixel:</label>
+   <input type="text" id="trackUrl" placeholder="http://analytics.internal/track"
+    style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #30363d; background-color: #161b22; color: #e6edf3; font-family: monospace; margin-bottom: 20px;">
+
+   <button onclick="sendTrack()"
+    style="background-color: #1f6feb; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+    Fire Pixel
+   </button>
+  </div>
+
+  <div id="result"
+   style="margin-top: 30px; display: none; padding: 20px; border-radius: 8px; background-color: rgba(56, 139, 253, 0.1); color: #58a6ff; border: 1px solid rgba(56, 139, 253, 0.4);">
+   Analytics task queued. No response from back-end (Blind Processing).
+  </div>
+ </div>
+
+ <div
+  style="margin-top: 40px; padding: 20px; background: rgba(139, 148, 158, 0.1); border-left: 4px solid #8b949e; border-radius: 4px;">
+  <h3 style="margin-top: 0; color: #8b949e;">Blind Lab Note:</h3>
+  <p style="margin-bottom: 0; line-height: 1.6;">
+   The application processes requests in the background. You will not receive any content from the target URL in the
+   response. Use an out-of-band tool (like <strong>Burp Collaborator</strong>) to verify the connection.
+  </p>
+ </div>
+</div>
+
+<script>
+ function sendTrack() {
+  const url = document.getElementById('trackUrl').value;
+  const resultDiv = document.getElementById('result');
+  resultDiv.style.display = 'block';
+
+  const formData = new FormData();
+  formData.append('url', url);
+
+  fetch('/level-12/api/analytics', {
+   method: 'POST',
+   body: formData
+  });
+ }
+</script>
+{% endblock %}
