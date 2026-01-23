@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div
+ style="max-width: 1000px; margin: 0 auto; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #e6edf3;">
+ <div
+  style="background-color: #161b22; border-radius: 12px; padding: 40px; border: 1px solid #30363d; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+  <h1 style="color: #ff7b72; margin: 0 0 10px 0;">Level 13: Blind SSRF with Shellshock 💀</h1>
+  <p style="color: #8b949e; font-size: 1.1em; margin-bottom: 30px;">
+   Exploit a blind SSRF vulnerability to execute Shellshock and exfiltrate internal data via DNS.
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+   <!-- Left Side: Scenario & Target -->
+   <div>
+    <h3 style="color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px;">Lab Scenario</h3>
+    <p style="line-height: 1.6;">
+     This site uses analytics software which fetches the URL specified in the <code>Referer</code> header when a product
+     page is loaded.
+    </p>
+    <div
+     style="background: rgba(88, 166, 255, 0.1); padding: 15px; border-radius: 6px; border-left: 4px solid #58a6ff; margin: 20px 0;">
+     <strong>Target Range:</strong> <code>192.168.0.X:8080</code><br>
+     <strong>Goal:</strong> Find the OS user name on the internal system.
+    </div>
+    <div
+     style="background: #0d1117; padding: 15px; border-radius: 6px; border: 1px solid #30363d; margin-bottom: 20px;">
+     <p style="margin-top:0; font-weight: bold; color: #f0883e;">Note for Browser Testing:</p>
+     <p style="margin-bottom:0; font-size: 0.9em;">Since you cannot manipulate headers via a simple click, use the API
+      directly or simulate headers in your testing tools.</p>
+    </div>
+    <a href="/level-13/product/1" target="_blank"
+     style="display: inline-block; background-color: #238636; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; transition: 0.2s;">
+     Explore Product Page ↗
+    </a>
+   </div>
+
+   <!-- Right Side: Mock Collaborator -->
+   <div style="background-color: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 20px;">
+    <h3 style="color: #d2a8ff; margin-top: 0;">Mock Burp Collaborator 🔬</h3>
+    <p style="font-size: 0.9em; color: #8b949e;">Generate a unique payload and poll for DNS interactions.</p>
+
+    <div style="margin-bottom: 20px;">
+     <button onclick="generatePayload()"
+      style="background: #30363d; border: 1px solid #484f58; color: #c9d1d9; padding: 8px 16px; border-radius: 6px; cursor: pointer; width: 100%;">
+      Generate Payload
+     </button>
+     <div id="payload-display"
+      style="margin-top: 10px; font-family: monospace; background: #161b22; padding: 10px; border-radius: 4px; display: none; color: #58a6ff; word-break: break-all;">
+     </div>
+    </div>
+
+    <button onclick="pollInteractions()" id="poll-btn"
+     style="background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 8px 16px; border-radius: 6px; cursor: pointer; width: 100%; display: none;">
+     Poll Now
+    </button>
+
+    <div id="interactions-list" style="margin-top: 15px; max-height: 200px; overflow-y: auto;">
+     <!-- Interactions will appear here -->
+    </div>
+   </div>
+  </div>
+
+  <!-- Flag Submission -->
+  <div style="margin-top: 40px; border-top: 1px solid #30363d; padding-top: 30px;">
+   <h3 style="color: #c9d1d9;">Exfiltrated OS User:</h3>
+   <div style="display: flex; gap: 10px;">
+    <input type="text" id="answer" placeholder="Enter OS user name..."
+     style="flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #30363d; background-color: #0d1117; color: #e6edf3;">
+    <button onclick="submitAnswer()"
+     style="background-color: #1f6feb; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+     Submit
+    </button>
+   </div>
+   <div id="submit-result" style="margin-top: 15px; display: none; padding: 15px; border-radius: 6px;"></div>
+  </div>
+ </div>
+</div>
+
+<script>
+ let currentSubdomain = null;
+
+ function generatePayload() {
+  currentSubdomain = Math.random().toString(36).substring(2, 12);
+  const display = document.getElementById('payload-display');
+  display.textContent = `${currentSubdomain}.mock-collab.net`;
+  display.style.display = 'block';
+  document.getElementById('poll-btn').style.display = 'block';
+ }
+
+ async function pollInteractions() {
+  if (!currentSubdomain) return;
+  const list = document.getElementById('interactions-list');
+  list.innerHTML = '<div style="color: #8b949e; text-align: center;">Polling...</div>';
+
+  try {
+   const response = await fetch(`/level-13/api/poll/${currentSubdomain}`);
+   const data = await response.json();
+
+   if (data.interactions.length === 0) {
+    list.innerHTML = '<div style="color: #8b949e; text-align: center;">No interactions yet.</div>';
+   } else {
+    list.innerHTML = data.interactions.map(i => `
+                <div style="background: #161b22; padding: 10px; border-radius: 4px; border-left: 3px solid #3fb950; margin-bottom: 5px;">
+                    <div style="font-size: 0.8em; color: #3fb950;">${i.type} Interaction</div>
+                    <div style="font-family: monospace; font-size: 0.9em; word-break: break-all;">${i.query}</div>
+                </div>
+            `).join('');
+   }
+  } catch (e) {
+   list.innerHTML = '<div style="color: #f85149;">Error polling interactions.</div>';
+  }
+ }
+
+ async function submitAnswer() {
+  const answer = document.getElementById('answer').value;
+  const resultDiv = document.getElementById('submit-result');
+
+  resultDiv.style.display = 'block';
+  resultDiv.style.backgroundColor = '#161b22';
+  resultDiv.innerHTML = 'Verifying...';
+
+  const formData = new FormData();
+  formData.append('answer', answer);
+
+  try {
+   const response = await fetch('/level-13/submit', {
+    method: 'POST',
+    body: formData
+   });
+   const data = await response.json();
+
+   if (data.status === 'success') {
+    resultDiv.style.backgroundColor = 'rgba(35, 134, 54, 0.2)';
+    resultDiv.style.color = '#3fb950';
+    resultDiv.innerHTML = `<strong>CORRECT:</strong> ${data.message}`;
+   } else {
+    resultDiv.style.backgroundColor = 'rgba(248, 81, 73, 0.2)';
+    resultDiv.style.color = '#f85149';
+    resultDiv.innerHTML = `<strong>ERROR:</strong> ${data.message}`;
+   }
+  } catch (e) {
+   resultDiv.innerHTML = 'Error Submitting Answer.';
+  }
+ }
+</script>
+{% endblock %}
